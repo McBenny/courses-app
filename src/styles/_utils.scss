@@ -1,0 +1,40 @@
+@import './variables';
+@import './mixins';
+
+//------------------------------------------------
+// Accessibility classes
+
+//-----------------------
+// Hiding Content for Everyone
+// Insure the use of the "hidden" attribute has the proper effect and beats any specificity
+[hidden] {
+    display: none !important;
+}
+
+//-----------------------
+// Showing Additional Content for Screen Readers
+.sr-only {
+    @include sr-only;
+}
+
+/**
+Sources
+    - https://cloudfour.com/thinks/see-no-evil-hidden-content-and-accessibility/
+    - https://github.com/ampproject/amphtml/blob/master/css/amp.css
+ */
+body::before {
+    display: none;
+    content: 'tablet-portrait';
+
+    @media screen and (min-width: $break-tablet-portrait + 1) {
+        content: 'tablet-landscape';
+    }
+
+    @media screen and (min-width: $break-tablet-landscape + 1) {
+        content: 'laptop';
+    }
+
+    @media screen and (min-width: $break-tablet-landscape + 50) {
+        content: 'laptop extendedLaptop';
+    }
+}
