@@ -1,7 +1,9 @@
-.search {
-    display: flex;
+.app {
+    .search {
+        display: flex;
 
-    &__keyword {
-        margin-right: 1rem;
+        &__keyword {
+            margin-right: 1rem;
+        }
     }
 }
