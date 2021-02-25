@@ -15,3 +15,14 @@ body {
 
     @include font-default;
 }
+
+.app {
+    // only used as an additional class to override Material-UI definitions
+}
+
+.title {
+    &--1 {
+        font-size: 2rem;
+        font-weight: 700;
+    }
+}
