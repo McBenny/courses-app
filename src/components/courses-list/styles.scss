@@ -1,17 +1,24 @@
 @import '../../styles/variables';
 
 .app {
-    .courses {
-        &__course {
-            display: flex;
-            align-items: flex-start;
-        }
-    }
-
     .course {
+        display: flex;
+        align-items: flex-start;
+        border-bottom: 1px solid $colour-border;
+        padding: 1rem 0;
+
+        &:last-child {
+            border: 0;
+        }
+
         &__data {
             display: grid;
             grid-template-columns: 8rem 1fr;
+        }
+
+        &__data-type {
+            font-style: italic;
+            font-size: 0.875rem;
         }
 
         &__content {
@@ -20,11 +27,15 @@
                 font-size: 1.5rem;
                 font-weight: 700;
             }
+
+            &--description {
+                margin-bottom: 1rem;
+            }
         }
 
         &__illustration {
             margin-right: 1rem;
-            max-width: 4rem;
+            width: 4rem;
         }
     }
 }

@@ -21,7 +21,7 @@ function CoursesList(props: Lessons) {
                         <dt className="course__data-type"><span className="sr-only">Title</span></dt>
                         <dd className="course__content course__content--title">{name}</dd>
                         <dt className="course__data-type"><span className="sr-only">Description</span></dt>
-                        <dd className="course__content">{description}</dd>
+                        <dd className="course__content course__content--description">{description}</dd>
                         <dt className="course__data-type">Author</dt>
                         <dd className="course__content">{author}</dd>
                         <dt className="course__data-type">Publish date</dt>
