@@ -1,13 +1,6 @@
 @import '../../styles/variables';
 
 .app {
-    margin: 1rem 2rem;
-
-    @media screen and (min-width: calc(#{$break-large} + 64px)) {
-        margin: 1rem auto;
-        max-width: $break-large;
-    }
-
     .courses {
         &__course {
             display: flex;

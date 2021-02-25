@@ -19,33 +19,31 @@ const Sorting = (props: SortProps) => {
     const [orderDuration, setOrderDuration] = useState(ORDERS.asc);
 
     return (
-        <>
-            <p className="sorting">
-                Sort by:
-                <Button
-                    className="sorting__button"
-                    variant="outlined"
-                    size="small"
-                    onClick={() => {
-                        sortCourses('sortableDate', orderDate);
-                        setOrderDate(orderDate === ORDERS.asc ? ORDERS.desc : ORDERS.asc);
-                    }}
-                >
-                    Date ({orderDate})
-                </Button>
-                <Button
-                    className="sorting__button"
-                    variant="outlined"
-                    size="small"
-                    onClick={() => {
-                        sortCourses('duration', orderDuration);
-                        setOrderDuration(orderDuration === ORDERS.asc ? ORDERS.desc : ORDERS.asc);
-                    }}
-                >
-                    Duration ({orderDuration})
-                </Button>
-            </p>
-        </>
+        <p className="sorting">
+            Sort by:
+            <Button
+                className="sorting__button"
+                variant="outlined"
+                size="small"
+                onClick={() => {
+                    sortCourses('sortableDate', orderDate);
+                    setOrderDate(orderDate === ORDERS.asc ? ORDERS.desc : ORDERS.asc);
+                }}
+            >
+                Date ({orderDate})
+            </Button>
+            <Button
+                className="sorting__button"
+                variant="outlined"
+                size="small"
+                onClick={() => {
+                    sortCourses('duration', orderDuration);
+                    setOrderDuration(orderDuration === ORDERS.asc ? ORDERS.desc : ORDERS.asc);
+                }}
+            >
+                Duration ({orderDuration})
+            </Button>
+        </p>
     );
 };
 

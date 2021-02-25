@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, screen } from '@testing-library/react';
+import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import CoursesList from './index';
 
 const coursesList = [
@@ -36,9 +36,32 @@ const coursesList = [
         image: 'https://cdn.pixabay.com/photo/2015/04/23/17/41/javascript-736400_960_720.png'
     }
 ];
+const notAuthenticated = false;
+const authenticated = true;
+const emptyFunction = () => {};
 
 test('renders a list of 4 courses', () => {
-    render(<CoursesList lessons={coursesList} />);
-    const linkElement = screen.getAllByText('Author');
-    expect(linkElement).toHaveLength(4);
+    render(<CoursesList lessons={coursesList} authenticated={notAuthenticated} authenticate={emptyFunction} />);
+    const textElement = screen.getAllByText('Author');
+    expect(textElement).toHaveLength(4);
+});
+
+test('add button is rendered', () => {
+    render(<CoursesList lessons={coursesList} authenticated={notAuthenticated} authenticate={emptyFunction} />);
+    const buttonElement = screen.getAllByText('Add course');
+    expect(buttonElement).toHaveLength(4);
+});
+
+test('authentication popup is rendered', async () => {
+    render(<CoursesList lessons={coursesList} authenticated={notAuthenticated} authenticate={emptyFunction} />);
+    fireEvent.click(screen.getAllByText('Add course')[0]);
+    const popupElement = screen.queryByText(/Please authenticate/);
+    expect(popupElement).toBeInTheDocument();
+});
+
+test('authentication popup is not rendered', async () => {
+    render(<CoursesList lessons={coursesList} authenticated={authenticated} authenticate={emptyFunction} />);
+    fireEvent.click(screen.getAllByText('Add course')[0]);
+    const popupElement = screen.queryByText(/Please authenticate/);
+    expect(popupElement).toBeNull();
 });

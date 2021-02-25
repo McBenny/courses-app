@@ -37,5 +37,11 @@
             margin-right: 1rem;
             width: 4rem;
         }
+
+        &__button {
+            position: absolute;
+            right: 0;
+            bottom: 1rem;
+        }
     }
 }

@@ -31,9 +31,10 @@ function Courses(props: Lessons) {
 
     const sortLessons = (criteria: string, order: string | undefined) => {
         const sortedLessons = [...displayedLessons].sort(compare(criteria, order));
-        console.log(criteria, order, sortedLessons);
         setDisplayedLessons(sortedLessons);
     };
+
+    const [authenticated, setAuthenticated] = useState(false);
 
     if (availableLessons) {
         return (
@@ -41,7 +42,11 @@ function Courses(props: Lessons) {
                 <Search searchCourse={searchCourse} />
                 <Sorting sortCourses={sortLessons} />
                 <div className="courses__list">
-                    <CoursesList lessons={displayedLessons} />
+                    <CoursesList
+                        lessons={displayedLessons}
+                        authenticated={authenticated}
+                        authenticate={setAuthenticated}
+                    />
                 </div>
             </>
         );

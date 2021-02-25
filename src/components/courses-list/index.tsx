@@ -1,16 +1,34 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
-import { List, ListItem } from '@material-ui/core';
+import { Button, List, ListItem } from '@material-ui/core';
 
-import { Lesson, Lessons } from '../../types/common.types';
+import { Lesson } from '../../types/common.types';
+
+import Authentication from '../authentication';
 
 import './styles.scss';
 
-function CoursesList(props: Lessons) {
-    const displayLessons = () => (
-        props.lessons.map((lessonItem: Lesson) => {
+function CoursesList(props: { lessons: Lesson[], authenticated: boolean, authenticate: (value: boolean) => void }) {
+    const { lessons, authenticated, authenticate } = props;
+    const [authenticationWindowStatus, setAuthenticationWindowStatus] = useState(false);
+
+    const addCourse = (lessonName: string) => {
+        // As this feature is not yet developed, I placed logs to identify the action to be taken
+        if (authenticated) {
+            // eslint-disable-next-line no-console
+            console.log('straight to cart with course', lessonName);
+        } else {
+            // eslint-disable-next-line no-console
+            console.log('must authenticate before storing', lessonName);
+            setAuthenticationWindowStatus(true);
+        }
+    };
+
+    const displayLessons = (lessonsList: Lesson[]) => (
+        lessonsList.map((lessonItem: Lesson) => {
             const { name, description, author, publishDate, duration, image } = lessonItem;
+
             return (
                 <ListItem
                     key={name}
@@ -29,6 +47,14 @@ function CoursesList(props: Lessons) {
                         <dt className="course__data-type">Duration</dt>
                         <dd className="course__content">{duration}</dd>
                     </dl>
+                    <Button
+                        className="course__button"
+                        size="small"
+                        variant="outlined"
+                        onClick={() => addCourse(lessonItem.name)}
+                    >
+                        Add course
+                    </Button>
                 </ListItem>
             );
         })
@@ -36,13 +62,24 @@ function CoursesList(props: Lessons) {
 
     return (
         <div className="courses">
-            <List component="nav">
-                {displayLessons()}
+            <List component="ul">
+                {displayLessons(lessons)}
             </List>
+            <Authentication
+                open={authenticationWindowStatus}
+                handleClose={() => setAuthenticationWindowStatus(false)}
+                authenticate={() => authenticate(true)}
+            />
         </div>
     );
 }
 
-CoursesList.propTypes = { lessons: PropTypes.arrayOf(PropTypes.object).isRequired };
+CoursesList.defaultProps = { authenticated: false };
+
+CoursesList.propTypes = {
+    lessons: PropTypes.arrayOf(PropTypes.object).isRequired,
+    authenticated: PropTypes.bool,
+    authenticate: PropTypes.func.isRequired
+};
 
 export default CoursesList;

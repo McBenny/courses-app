@@ -5,7 +5,7 @@ const compare = (key: string, order: string = 'ASC') => {
     if (order === 'DESC') {
         sortOrder = -1;
     }
-    return function (a: Lesson, b: Lesson) {
+    return (a: Lesson, b: Lesson) => {
         let result = 0;
         // @ts-ignore
         if (a[key] < b[key]) {
@@ -15,7 +15,6 @@ const compare = (key: string, order: string = 'ASC') => {
             result = 1;
         }
         return result * sortOrder;
-        // const result = (a[key] < b[key]) ? -1 : (a[key] > b[key]) ? 1 : 0;
     };
 };
 
