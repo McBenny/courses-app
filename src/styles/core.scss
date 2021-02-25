@@ -17,11 +17,17 @@ body {
 }
 
 .app {
-    // only used as an additional class to override Material-UI definitions
+    margin: 1rem 2rem;
+
+    @media screen and (min-width: calc(#{$break-large} + 64px)) {
+        margin: 1rem auto;
+        max-width: $break-large;
+    }
 }
 
 .title {
     &--1 {
+        margin: 1rem auto 2rem;
         font-size: 2rem;
         font-weight: 700;
     }
